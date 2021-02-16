@@ -1,0 +1,7 @@
+/.idea/
+/tmp/
+.tgz
+.DS_Store
+/kafka-config/
+/kafka-data/
+/zookeeper/
