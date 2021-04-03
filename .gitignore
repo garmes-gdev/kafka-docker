@@ -5,3 +5,4 @@
 /kafka-config/
 /kafka-data/
 /zookeeper/
+/connect

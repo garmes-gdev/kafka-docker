@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-COMPONENTS="|zookeeper|kafka|"
+COMPONENTS="|zookeeper|kafka|connect|"
 
 if [ "x$COMPONENT" = 'x' ]; then
     echo "COMPONENT not defined"

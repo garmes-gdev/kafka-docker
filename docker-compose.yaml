@@ -25,3 +25,27 @@ services:
       - ./kafka-data:/opt/kafka/kafka/data
     depends_on:
       - zookeeper
+  kafkaconnect:
+    image: mgarmes/kafka
+    ports:
+      - "8083:8083"
+    environment:
+      COMPONENT: connect
+      CONNECT_BOOTSTRAP_SERVERS: kafka:19092
+      CONNECT_GROUP_ID: compose-connect-group
+      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_PLUGIN_PATH: /opt/kafka/plugins
+    volumes:
+      - ./plugins:/opt/kafka/plugins
+      - ./connect:/opt/kafka//custom-config
+    depends_on:
+      - kafka
